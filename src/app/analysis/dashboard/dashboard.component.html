@@ -1,0 +1,161 @@
+<mat-card class="mat-card">
+
+<!--  <div class="sidebar">-->
+<!--    <h1 class="title">Analyst Workspace</h1>-->
+<!--    <hr>-->
+<!--  <ul class="sidebar-ul">-->
+<!--    <li class="sidebar-li" (click)="changeValue(1)">Age Count</li>-->
+<!--    <li class="sidebar-li" (click)="changeValue(2)">Age Count</li>-->
+<!--    <li class="sidebar-li" (click)="changeValue(3)">Month Count</li>-->
+<!--    <li class="sidebar-li" (click)="changeValue(4)">Month Year Count</li>-->
+<!--    <li class="sidebar-li" (click)="changeValue(5)">Month Date Count</li>-->
+<!--    <li class="sidebar-li" (click)="changeValue(6)">Others</li>-->
+<!--  </ul>-->
+<!--  </div>-->
+
+<!--  <div class="body">-->
+<!--    <button mat-raised-button type="submit" routerLink="/home" style="top: 5px">Home</button> &nbsp;&nbsp;-->
+<!--    <span [ngSwitch]="myVal">-->
+<!--      <span *ngSwitchDefault>-->
+<!--        <div echarts [options]="chart1" class="chart" style="height: 50%; width: 80%"></div>-->
+<!--        <div echarts [options]="chart2" class="chart" style="height: 50%; width: 80%"></div>-->
+<!--      </span>-->
+<!--      -->
+<!--        <span  *ngSwitchCase="'2'">-->
+<!--          <div echarts [options]="chart5" class="chart" style="height: 50%; width: 80%"></div>-->
+<!--      </span>-->
+<!--      -->
+<!--      <span  *ngSwitchCase="'3'">-->
+<!--        <div echarts [options]="chart3" class="chart" style="height: 50%; width: auto; top: 10px"></div>-->
+<!--        <div echarts [options]="chart4" class="chart" style="height: 50%; width: auto"></div>-->
+<!--      </span>-->
+<!--      -->
+<!--       <span  *ngSwitchCase="'4'">-->
+<!--         <div echarts [options]="chart7" class="chart" style="top: 15px"></div>-->
+<!--       </span>-->
+<!--      -->
+<!--      <span  *ngSwitchCase="'5'">-->
+<!--           <div echarts [options]="chart6" class="chart" style="top: 15px"></div>-->
+<!--      </span>-->
+
+<!--      <span  *ngSwitchCase="'6'">-->
+<!--        <div echarts [options]="option5" class="chart"></div>-->
+
+<!--      </span>-->
+<!--    </span>-->
+
+<!--  </div>-->
+
+
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary nav">
+
+    <a class="navbar-brand" hrouterLink="/home">
+      <img src="../../assets/EISwhite.png" style="width: 50px; height: 30px" class="d-inline-block align-top" alt=""> &nbsp;
+      <span class="menu-collapsed" style="top: 5px">Analyst Work Space</span>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav><!-- NavBar END -->
+  <!-- Bootstrap row -->
+  <div class="row" id="body-row">
+    <!-- Sidebar -->
+    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
+      <ul class="list-group">
+        <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+          <small>Age Count</small>
+        </li>
+        <!-- /END Separator -->
+        <!-- Menu with submenu -->
+        <a data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start"
+            (click)="changeValue(1)">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-dashboard fa-fw mr-3"></span>
+            <span class="menu-collapsed">AgeBar</span>
+          </div>
+        </a>
+        <!-- Submenu content -->
+
+        <a data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start"
+          (click)="changeValue(2)">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-user fa-fw mr-3"></span>
+            <span class="menu-collapsed">AgePie</span>
+          </div>
+        </a>
+        <!-- Submenu content -->
+
+        <!-- Separator with title -->
+        <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+          <small>Month Count</small>
+        </li>
+        <!-- /END Separator -->
+        <a class="bg-dark list-group-item list-group-item-action"  (click)="changeValue(3)">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-calendar fa-fw mr-3"></span>
+            <span class="menu-collapsed">Month Count</span>
+          </div>
+        </a>
+        <a class="bg-dark list-group-item list-group-item-action" (click)="changeValue(4)">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-tasks fa-fw mr-3"></span>
+            <span class="menu-collapsed">Month/Date Count</span>
+          </div>
+        </a>
+        <a class="bg-dark list-group-item list-group-item-action"  (click)="changeValue(5)">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-envelope-o fa-fw mr-3"></span>
+            <span class="menu-collapsed">Year/month Count</span>
+          </div>
+        </a>
+
+
+        <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+          <small>Others</small>
+        </li>
+        <a class="bg-dark list-group-item list-group-item-action" (click)="changeValue(6)">
+          <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="fa fa-envelope-o fa-fw mr-3"></span>
+            <span class="menu-collapsed">More</span>
+          </div>
+        </a>
+      </ul><!-- List Group END-->
+    </div><!-- sidebar-container END -->
+    <!-- MAIN -->
+    <div class="col p-4 bodyclass">
+     <span [ngSwitch]="myVal">
+      <span *ngSwitchDefault>
+        <div echarts [options]="chart1" class="chart" style="height: 50%; width: 80%"></div>
+        <div echarts [options]="chart2" class="chart" style="height: 50%; width: 80%;"></div>
+      </span>
+
+        <span  *ngSwitchCase="'2'">
+          <div echarts [options]="chart5" class="chart" style="height: 50%; width: 80%; top: 15vh"></div>
+      </span>
+
+      <span  *ngSwitchCase="'3'">
+        <div echarts [options]="chart3" class="chart" style="height: 50%; width: auto; top: 10px"></div>
+        <div echarts [options]="chart4" class="chart" style="height: 50%; width: auto"></div>
+      </span>
+
+       <span  *ngSwitchCase="'4'">
+         <div echarts [options]="chart7" class="chart" style="top: 15px"></div>
+       </span>
+
+      <span  *ngSwitchCase="'5'">
+           <div echarts [options]="chart6" class="chart" style="top: 15px"></div>
+      </span>
+
+      <span  *ngSwitchCase="'6'">
+        <div echarts [options]="option5" class="chart"></div>
+
+      </span>
+    </span>
+    </div><!-- Main Col END -->
+  </div><!-- body-row END -->
+</mat-card>

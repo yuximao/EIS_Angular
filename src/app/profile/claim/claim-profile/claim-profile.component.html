@@ -1,0 +1,16 @@
+<div>
+
+  <app-claim-image *ngFor="let image of this.claim.claimImages" [claimImages] = "image"></app-claim-image>
+
+  <h2 >Claim Number:</h2>
+  <h3>{{this.claim.id}}</h3>
+  <h2 >Insurance Number:</h2>
+  <h3>{{this.claim.insurid}}</h3>
+  <h2 >Ticket Number:</h2>
+  <h3>{{this.claim.ticket}}</h3>
+  <h2 >Date:</h2>
+  <h3>{{this.claim.ticketdate | date:'yyyy-MM-dd'}}</h3>
+  <h2 >Details:</h2>
+  <h3>{{this.claim.detail}}</h3>
+  <hr>
+</div>

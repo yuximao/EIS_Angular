@@ -1,0 +1,415 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<mat-card class="matC">
+
+  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <!--    first page  -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Personal Info</ng-template>
+
+        <span *ngIf="!hasProfile">Hi! <span style="color: #4183D7;font-size: large">{{auth.user.username}}</span>,
+          Let`s just start with some easy part! Please tell us about your self</span>
+        <span *ngIf="hasProfile">Hi! <span style="color: #4183D7;font-size: large">{{auth.user.username}}</span>,
+        Welcome back! You can edit your profile information or just skip.</span>
+        <br>
+        <mat-form-field class="col-md-6">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="How old are you now?" formControlName="age" required [(ngModel)]="profile.age">
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>Driving Age</mat-label>
+          <input matInput placeholder="How long have you drive?" formControlName="driving_age" required
+                 [(ngModel)]="profile.driving_age">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="col-md-6">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Your Address" formControlName="address" required [(ngModel)]="profile.address">
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>Education</mat-label>
+          <input matInput placeholder="Whats your highest degree?" formControlName="degree" required
+                 [(ngModel)]="profile.degree">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="col-md-6">
+          <mat-label>Phone</mat-label>
+          <input matInput placeholder="Your personal Phone number" formControlName="selphone" required
+                 [(ngModel)]="profile.selphone">
+        </mat-form-field>
+        <br>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!--    second page  -->
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Vehicle Info</ng-template>
+        <div>
+          &nbsp;<input type="checkbox" (change)="getChecked($event)"/> &nbsp; Wanna Use your old insurance?
+          <span *ngIf="hasInsur"> &nbsp;
+            &nbsp;
+            <mat-form-field class="col-md-3">
+            <mat-label>Insurance ID</mat-label>
+
+              <mat-select formControlName="insur_id" [(value)]="insurid">
+                <mat-option  *ngFor="let id of userInsuranceId" [value]="id">
+                              {{id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+        </div>
+
+        <span *ngIf="!hasInsur">
+          <mat-form-field class="example-full-width" class="col-md-6">
+                  <mat-label>Choose a Start date</mat-label>
+                  <input matInput formControlName="start_date" [matDatepicker]="picker" [(ngModel)]="start_day">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" class="col-md-6">
+                  <mat-label>Choose an End date</mat-label>
+                  <input matInput formControlName="end_date" [matDatepicker]="picker2" [(ngModel)]="end_date">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker2></mat-datepicker>
+          </mat-form-field>
+        </span>
+        <mat-form-field class="col-md-6">
+          <mat-label>VIN Number</mat-label>
+          <input matInput formControlName="vin" placeholder="Vehicle number" [(ngModel)]="car.vin"
+                 required>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>Make</mat-label>
+          <input matInput formControlName="make" placeholder="Ex. BMW" [(ngModel)]="car.make"
+                 required>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>Model</mat-label>
+          <input matInput formControlName="model" placeholder="Ex. 325i" [(ngModel)]="car.model"
+                 required>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>Year</mat-label>
+          <input matInput formControlName="year" placeholder="Ex. 2018" [(ngModel)]="car.year"
+                 required>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>Miles</mat-label>
+          <input matInput formControlName="miles" placeholder="Ex. 10200" [(ngModel)]="car.miles"
+                 required>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <mat-label>Color</mat-label>
+          <input matInput formControlName="color" placeholder="Ex. Red" [(ngModel)]="car.color"
+                 required>
+        </mat-form-field>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;<mat-label>Vehicle photo</mat-label> &nbsp;
+          <input type="file" #files>
+          <a class="tag-a" (click)="addPhoto('eisuserphoto')">Select this photo</a>
+        <br><br>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!--third page-->
+    <mat-step [stepControl]="thirdFormGroup">
+      <!--      <form [formGroup]="thirdFormGroup">-->
+      <ng-template matStepLabel>History</ng-template>
+
+      <p>Please Report ALL your Ticket History</p>
+
+      <div *ngFor="let ticket of tickets">
+        <mat-form-field class="col-md-6">
+          <mat-label>Ticket Number</mat-label>
+          <input matInput placeholder="Start with X"
+                 required [(ngModel)]="ticket.ticket">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" id="date" class="col-md-6">
+          <mat-label>Ticket Date</mat-label>
+          <input matInput [matDatepicker]="picker" required
+                 [(ngModel)]="ticket.ticketdate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <button mat-button (click)="addTicket()">Add</button>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+      <!--      </form>-->
+    </mat-step>
+
+    <!--Done page-->
+    <mat-step>
+      <ng-template matStepLabel>Policy</ng-template>
+
+      <h2>User Aggrement</h2>
+      <ul>
+        <li>Declarations - identifies who is an insured, the insured's address, the insuring company, what risks or
+          property are covered, the policy limits (amount of insurance), any applicable deductibles, the policy period
+          and premium amount.<sup id="cite_ref-Mowbray73_21-0" class="reference"><a
+            href="#cite_note-Mowbray73-21">[21]</a></sup><sup id="cite_ref-22" class="reference"><a
+            href="#cite_note-22">[22]</a></sup> These are usually provided on a form that is filled out by the insurer
+          based on the insured's application and attached on top of or inserted within the first few pages of the
+          policy.
+        </li>
+        <li>Definitions - Defines important terms used in the rest of the policy.<sup id="cite_ref-Mathias16_23-0"
+                                                                                      class="reference"><a
+          href="#cite_note-Mathias16-23">[23]</a></sup></li>
+        <li>Insuring agreement - Describes the covered perils, or risks assumed, or nature of coverage. This is where
+          the insurance company makes one or more express promises to <a href="/wiki/Indemnity" title="Indemnity">indemnify</a>
+          the insured.<sup id="cite_ref-Mowbray72_24-0" class="reference"><a
+            href="#cite_note-Mowbray72-24">[24]</a></sup><sup id="cite_ref-25" class="reference"><a
+            href="#cite_note-25">[25]</a></sup></li>
+        <li>Exclusions - Takes coverage away from the insuring agreement by describing property, perils, hazards or
+          losses arising from specific causes which are not covered by the policy.
+        </li>
+        <li>Conditions - These are specific provisions, rules of conduct, duties, and obligations that the insured must
+          comply with in order for coverage to incept or must remain in compliance with in order to keep coverage in
+          effect. If policy conditions are not met, the insurer can deny the claim.<sup id="cite_ref-Mowbray7374_26-0"
+                                                                                        class="reference"><a
+            href="#cite_note-Mowbray7374-26">[26]</a></sup><sup id="cite_ref-Mathias16_23-1" class="reference"><a
+            href="#cite_note-Mathias16-23">[23]</a></sup></li>
+        <li>Policy form - The definitions, insuring agreement, exclusions, and conditions are typically combined into a
+          single integrated document called a policy form, coverage form, or coverage part. When multiple coverage forms
+          are packaged into a single policy, the declarations will state as much, and then there may be additional
+          declarations specific to each coverage form. Traditionally, policy forms have been so rigidly standardized
+          that they have no blank spaces to be filled in. Instead, they always expressly refer to terms or amounts
+          stated in the declarations. If the policy needs to be customized beyond what is possible with the
+          declarations, then the underwriter attaches endorsements or riders.
+        </li>
+        <li>Endorsements - Additional forms attached to the policy that modify it in some way, either unconditionally or
+          upon the existence of some condition.[27][28] Endorsements can make policies difficult to read for nonlawyers;
+          they may revise, expand, or delete clauses located many pages earlier in one or more coverage forms, or even
+          modify each other. Because it is very risky to allow nonlawyer underwriters to directly rewrite policy forms
+          with word processors, insurers usually direct underwriters to modify them by attaching endorsements
+          preapproved by counsel for various common modifications.
+        <li>Riders - A rider is used to convey the terms of a policy amendment and the amendment thereby becomes part of
+          the policy. Riders are dated and numbered so that both insurer and policyholder can determine provisions and
+          the benefit level. Common riders to group medical plans involve name changes, change to eligible classes of
+          employees, change in level of benefits, or the addition of a managed care arrangement such as a Health
+          Maintenance Organization or Preferred Provider Organization (PPO).[29]
+        <li>Jackets - The term has several distinct and confusing meanings. In general, it refers to some set of
+          standard boilerplate provisions which accompanies all policies at the time of delivery. Some insurers refer to
+          a package of standard documents shared across an entire family of policies as a "jacket." Some insurers extend
+          this to include policy forms, so that the only parts of the policy not part of the jacket are the
+          declarations, endorsements, and riders. Other insurers use the term "jacket" in a manner closer to its
+          ordinary meaning: a binder, envelope, or presentation folder with pockets in which the policy may be
+          delivered, or a cover sheet to which the policy forms are stapled or which is stapled on top of the policy.
+          The standard boilerplate provisions are then printed on the jacket itself.
+        <li>Insurance contracts are generally considered contracts of adhesion because the insurer draws up the contract
+          and the insured has little or no ability to make material changes to it. This is interpreted to mean that the
+          insurer bears the burden if there is any ambiguity in any terms of the contract. Insurance policies are sold
+          without the policyholder even seeing a copy of the contract.[2]:27 In 1970 Robert Keeton suggested that many
+          courts were actually applying 'reasonable expectations' rather than interpreting ambiguities, which he called
+          the 'reasonable expectations doctrine'. This doctrine has been controversial, with some courts adopting it and
+          others explicitly rejecting it.[5] In several jurisdictions, including California, Wyoming, and Pennsylvania,
+          the insured is bound by clear and conspicuous terms in the contract even if the evidence suggests that the
+          insured did not read or understand them.[6][7][8]
+        <li>Insurance contracts are aleatory in that the amounts exchanged by the insured and insurer are unequal and
+          depend upon uncertain future events.[9][10] In contrast, ordinary non-insurance contracts are commutative in
+          that the amounts (or values) exchanged are usually intended by the parties to be roughly equal.[9][10] This
+          distinction is particularly important in the context of exotic products such as finite risk insurance that
+          contain "commutation" provisions.
+        <li>Insurance contracts are unilateral, meaning that only the insurer makes legally enforceable promises in the
+          contract. The insured is not required to pay the premiums, but the insurer is required to pay the benefits
+          under the contract if the insured has paid the premiums and met certain other basic provisions.[11]
+        <li>Insurance contracts are governed by the principle of utmost good faith (uberrima fides), which requires both
+          parties of the insurance contract to deal in good faith and in particular, imparts on the insured a duty to
+          disclose all material facts that relate to the risk to be covered.[12] This contrasts with the legal doctrine
+          that covers most other types of contracts, caveat emptor (let the buyer beware). In the United States, the
+          insured can sue an insurer in tort for acting in bad faith.
+      </ul>
+      <h4 style="color: red;">Please read this user policy clearly</h4>
+
+      <mat-checkbox [(ngModel)]="agreement">I Aggree</mat-checkbox>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext [disabled]="!agreement" (click)="getPrice()">Go Payment</button>
+      </div>
+    </mat-step>
+    <!-- payment page-->
+    <mat-step>
+      <ng-template matStepLabel>Payment</ng-template>
+      <h1>Payment</h1>
+      <span style="font-size: large">Your price</span>&nbsp;
+      <span style="font-size: large">$ <span style="color: crimson;font-style: inherit;">{{this.price}}</span></span>
+      <div class="card-body p-5">
+
+        <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" ngClass.gt-xs="" data-toggle="pill" (click)="pay1()">
+              <i class="fa fa-credit-card"></i> Credit Card</a></li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" (click)="pay2()">
+              <i class="fab fa-paypal"></i> Paypal</a></li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" (click)="pay3()">
+              <i class="fa fa-university"></i> Bank Transfer</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div *ngIf="PaySwitch1" id="nav-tab-card">
+            <p class="alert alert-success">Your Payment here</p>
+            <form role="form">
+              <div class="form-group">
+                <label>Full name (on the card)</label>
+                <input type="text" class="form-control" name="username" placeholder="" required="">
+              </div> <!-- form-group.// -->
+
+              <div class="form-group">
+                <label>Card number</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="cardNumber" placeholder="">
+                  <div class="input-group-append">
+				<span class="input-group-text text-muted">
+					<i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>  
+					<i class="fab fa-cc-mastercard"></i>
+				</span>
+                  </div>
+                </div>
+              </div> <!-- form-group.// -->
+
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <label><span class="hidden-xs">Expiration</span> </label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" placeholder="MM" name="">
+                      <input type="number" class="form-control" placeholder="YY" name="">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV
+                      <i class="fa fa-question-circle"></i></label>
+                    <input type="number" class="form-control" required="">
+                  </div> <!-- form-group.// -->
+                </div>
+              </div> <!-- row.// -->
+              <!--                  <button class="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>-->
+            </form>
+          </div> <!-- tab-pane.// -->
+          <div *ngIf="PaySwitch2" id="nav-tab-paypal">
+            <p>Paypal is easiest way to pay online</p>
+            <p>
+              <button type="button" class="btn btn-primary"><i class="fab fa-paypal"></i> Log in my Paypal</button>
+            </p>
+            <p><strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. </p>
+          </div>
+          <div *ngIf="PaySwitch3" id="nav-tab-bank">
+            <p>Bank accaunt details</p>
+            <dl class="param">
+              <dt>BANK:</dt>
+              <input type="text" class="form-control" name="bankName" placeholder="">
+            </dl>
+            <dl class="param">
+              <dt>Accaunt number:</dt>
+              <input type="text" class="form-control" name="bankNumber" placeholder="">
+            </dl>
+            <dl class="param">
+              <dt>IBAN:</dt>
+              <input type="text" class="form-control" name="IBAN" placeholder="">
+            </dl>
+            <p><strong style="color: #f44336">Note:</strong> Please make sure that all the bank information you enter is
+              correct, wrong input may lead to serious consequences </p>
+          </div> <!-- tab-pane.// -->
+        </div> <!-- tab-content .// -->
+      </div>
+
+      <div>
+        <button mat-button routerLink="/home">Cancel</button>
+        <button mat-button style="color: #f44336" (click)="Submit()">Confirm Payment</button>
+        <button mat-button (click)="save()">Save for Later</button>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</mat-card>
+<div *ngIf="iscard" class="cc">
+  <ng-payment-card></ng-payment-card>
+</div>
+
+<div *ngIf="saveLateralert" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Your insurance was save for later!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Your insurance ID is {{insurid}}`</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="saveGo()">OK</button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="saveAlert" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Thank for your payment</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Click to download your receipt</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="payGo()">OK</button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="insurWrong" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Your Insurance number is wrong!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Please try again</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="insurWongGo()">OK</button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="updateImg" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Your photo submit success!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>I like this one</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="updateImg = false">OK</button>
+    </div>
+  </mat-card>
+</div>

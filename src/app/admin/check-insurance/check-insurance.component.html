@@ -1,0 +1,30 @@
+<mat-card class="mat-card">
+  <div class="container-fluid outside">
+    <h1>Insurance Information</h1>
+    <h3>User ID: {{id}}</h3>
+    <button mat-button routerLink="/admin">Back</button>
+    <hr>
+        <div class="card col-md-4" *ngFor="let insur of insurancelist">
+          <div class="card-body">
+            <h5 class="card-title">Insurance ID: {{insur.id}}</h5>
+            <h3 class="card-subtitle mb-2 text-muted">Start Date: {{insur.start_date | date:'yyyy-MM-dd'}}</h3>
+            <h3 class="card-subtitle mb-2 text-muted">End Date: {{insur.end_date | date:'yyyy-MM-dd'}}</h3>
+            <h3 class="card-subtitle mb-2 text-muted">Total Payment: {{insur.price}}</h3>
+            <button mat-raised-button color="primary" (click)="showCar(insur.id)">
+              Show Car</button>
+            <hr>
+            <span class="card-text" *ngFor="let car of insur.cars">
+              <span *ngIf="isShowCar && insur.id == ChangedId">
+
+                <img style="height: 80px; width: 120px;" src="{{car.carphoto}}">
+                <p>VIN: {{car.vin}} | Miles: {{car.miles}}</p>
+                <p>Make: {{car.make}} | Model: {{car.model}}</p>
+                <p>Year: {{car.year}} | Color: {{car.color}}</p>
+                <hr>
+              </span>
+            </span>
+          </div>
+    </div>
+  </div>
+
+</mat-card>

@@ -1,0 +1,15 @@
+<mat-card class="mat-card">
+  <div class="outside">
+    <h1 style="top:10px">Ticket History Check</h1>
+    <h3>User ID: {{id}}</h3>
+    <button mat-button routerLink="/admin">Back</button>
+    <hr>
+    <div *ngFor="let history of historylist">
+      <p>Ticket ID: {{history.ticket}}</p>
+      <p>Ticket Date: {{history.ticketdate | date:'yyyy-MM-dd'}}</p>
+      <a href="https://portalnjmcdirect-cloud.njcourts.gov/prweb/PRServletPublicAuth/wQ2guhy8lqKPggD8pVI7RLYVZ9vxwNMF*/!STANDARD?AppName=NJMC&fromBrowserHistory=true">Go Check</a>
+      <hr>
+    </div>
+  </div>
+
+</mat-card>

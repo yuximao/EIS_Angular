@@ -1,0 +1,56 @@
+<div class="quote-block">
+
+  <div class="buttons">
+
+    <span *ngIf="auth.role==null">
+
+     <button class="quote-button" routerLink="/login">
+        <span style="font-weight:bold;font-size:24px;color:white;" >SignIn</span>
+     </button>
+     <br><br>
+     <button class="quote-button" routerLink="/register">
+        <span style="font-weight:bold;font-size:24px;color:white;" >Register</span>
+     </button>
+    </span>
+
+
+    <span *ngIf="auth.role==1">
+      <h1 style="color: antiquewhite ; font-weight: bolder; font-size: 30px;text-align: center">Hello! {{this.auth.user?.username}}</h1>
+
+      <button class="quote-button" routerLink="/quote">
+        <span style="font-weight:bold;font-size:24px;color:white;" >Get Quote</span>
+      </button>
+      <br><br>
+      <button class="quote-button" *ngIf="!auth.user" routerLink="/login">
+        <span style="font-weight:bold;font-size:24px;color:white;" >SignIn</span>
+      </button>
+      <button class="quote-button" *ngIf="auth.user" routerLink="/profile">
+        <span style="font-weight:bold;font-size:24px;color:white;" >Profile</span>
+      </button>
+      <br><br>
+      <button class="quote-button" *ngIf="auth.user" routerLink="/claim">
+        <span style="font-weight:bold;font-size:24px;color:white;" >Start Claim</span>
+      </button>
+      <button class="quote-button" *ngIf="!auth.user" routerLink="/register">
+        <span style="font-weight:bold;font-size:24px;color:white;" >Register</span>
+      </button>
+    </span>
+
+    <span *ngIf="auth.role==2">
+      <h1 style="color: antiquewhite ; font-weight: bolder; font-size: 30px;">Hello! Admin</h1>
+      <button class="quote-button" routerLink="/admin">
+        <span style="font-weight:bold;font-size:24px;color:white;" >Management</span>
+      </button>
+
+    </span>
+    <span *ngIf="auth.role==3">
+      <h1 style="color: antiquewhite ; font-weight: bolder; font-size: 30px;">Hello! Analyst</h1>
+      <button class="quote-button" routerLink="/dashboard">
+        <span style="font-weight:bold;font-size:24px;color:white;" >Analyst</span>
+      </button>
+    </span>
+
+
+  </div>
+
+</div>

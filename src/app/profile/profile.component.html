@@ -1,0 +1,189 @@
+<mat-card class="matC">
+  <div class="container emp-profile">
+    <form method="post">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="profile-img">
+            <img alt="" src="{{this.auth.profile?.photo}}"/>
+            <!--          <div class="file btn btn-lg btn-primary">-->
+            <!--            Change Photo-->
+            <!--            <input type="file" name="file"/>-->
+            <!--          </div>-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="profile-head">
+            <h2>
+              {{this.auth.user?.username}}
+            </h2>
+            <div>
+              <a class="idCard" routerLink="/listInsur">
+                <h3> My Auto Insurance </h3>
+                <div>
+                  <img height="60" src="https://www.carmax.com/cars/images/type-icons/sport-utilities.svg" width="100">
+                </div>
+              </a>
+            </div>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab"
+                   id="home-tab" role="tab">About</a>
+              </li>
+
+              <!--              <li class="nav-item">-->
+              <!--                <a aria-controls="profile" aria-selected="false" class="nav-link" data-toggle="tab" href="profile/#bcd"-->
+              <!--                   id="profile-tab" role="tab">Timeline</a>-->
+              <!--              </li>-->
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <input class="profile-edit-btn" name="btnAddMore" routerLink="/home" type="submit" value="Home"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="profile-work">
+            <a style="font-size: larger" routerLink="/changePsw">Change Password</a><br/>
+            <a style="font-size: larger" routerLink="/changeEmail">Change Email</a><br/>
+            <p style="font-size: larger; color: rgb(75,82,88)">Update Photo</p>
+            <input  type="file" id="photoupload" #files><br>
+            <button mat-stroked-button (click)="addPhoto('eisuserphoto')"
+            style="top:5px"> Submit</button>
+            <br><br>
+
+            <br><br>
+
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="tab-content profile-tab" id="myTabContent">
+            <div aria-labelledby="home-tab" class="tab-pane fade show active" id="abc" role="tabpanel">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>User Id</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{this.auth.user?.id}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Name</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{this.auth.user?.username}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Email</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{this.auth.user?.email}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Age</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{this.auth.profile?.age}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Driving Year</label>
+                </div>
+                <div class="col-md-6">
+                  <p>{{this.auth.profile?.driving_age}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Self Phone</label>
+                </div>
+                <div class="col-md-6">
+                  <input *ngIf="this.isUpdate" name="phone" [(ngModel)]="profile.selphone"/>
+
+                  <p *ngIf="!this.isUpdate">{{this.auth.profile?.selphone}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Address</label>
+                </div>
+                <div class="col-md-6">
+                  <input *ngIf="this.isUpdate" name="address" [(ngModel)]="profile.address"/>
+
+                  <p *ngIf="!this.isUpdate">{{this.auth.profile?.address}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Education Degree</label>
+                </div>
+                <div class="col-md-6">
+                  <input *ngIf="this.isUpdate" name="degree" [(ngModel)]="profile.degree"/>
+                  <p *ngIf="!this.isUpdate">{{this.auth.profile?.degree}}</p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="this.isUpdate">
+                <div class="col-md-6">
+                  <label>New Photo Url</label>
+                </div>
+                <div class="col-md-6">
+                  <input name="photo" [(ngModel)]="profile.photo"/>
+                </div>
+              </div>
+              <button mat-button *ngIf="!this.isUpdate" style="right: 20%;position: absolute;  color: #6c757d;"
+                      (click)="update()">Edit
+              </button>
+              <button mat-button color="warn" (click)="saveChange()" *ngIf="this.isUpdate">Save Change</button>
+              <button mat-button color="warn" (click)="cancel()" *ngIf="this.isUpdate">Cancel</button>
+
+              <br>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</mat-card>
+
+<div *ngIf="showalert" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1> Photo update Success! </h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>I like your new photo</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="showalert = false">OK</button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="showalert2" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1> Please add a photo first </h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Can not be empty</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="showalert2 = false">OK</button>
+    </div>
+  </mat-card>
+</div>

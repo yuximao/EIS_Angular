@@ -1,0 +1,40 @@
+<!--<mat-card-title>Login</mat-card-title>-->
+<div class="login-div">
+  <mat-card class="matC" >
+
+    <h1 style="display: inline">Login</h1>
+    <mat-icon aria-hidden="false" aria-label="Example home icon" routerLink="/home"
+              style="margin-left: 80%;">home</mat-icon>
+    <form class="example-form" #f="ngForm" (ngSubmit)="Submit(f);">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>UserName</mat-label>
+          <input matInput placeholder="Ex. YuxiMao" name="username" ngModel>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+          <input matInput type="password" name="password" [(ngModel)]="auth.psw">
+      </mat-form-field>
+
+      <button mat-raised-button type="submit">Login</button> &nbsp;&nbsp;
+      <a routerLink="/register">New here? Register Now! </a>
+
+    </form>
+  </mat-card>
+</div>
+
+<div *ngIf="showalert" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Login false!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Please try again</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="showalert = false">OK</button>
+    </div>
+  </mat-card>
+</div>

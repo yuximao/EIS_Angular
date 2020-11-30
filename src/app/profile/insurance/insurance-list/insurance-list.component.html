@@ -1,0 +1,5 @@
+
+<div class="insurance-list">
+  <button mat-raised-button (click)="back()" >Back</button>
+  <app-insurance-profile class="ng-insurance-profile" *ngFor="let ins of this.insur.insurance" [ins] = "ins"></app-insurance-profile>
+</div>

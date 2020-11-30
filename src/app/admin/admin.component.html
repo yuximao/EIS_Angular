@@ -1,0 +1,72 @@
+<mat-card class="mat-card">
+  <div class="col-md-12">
+    <button mat-button routerLink="/home" style="color: #f44336">Home</button>
+  </div>
+  <div class="title">
+    <h2>Admin Control Tag</h2>
+  </div>
+  <div class="row">
+    <div class="col-lg-10 col-md-10 ml-auto mr-auto userlist">
+      <h4><small>User Edit List</small></h4>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th class="text-center">Insurance</th>
+            <th class="text-center">History</th>
+            <th class="text-center">Claim</th>
+            <th class="text-center">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of admin.users">
+              <td class="text-center">{{user.id}}</td>
+
+              <td *ngIf="!editUser||user.id != changedId">{{user.username}}</td>
+              <td *ngIf="editUser&&user.id == changedId"><input type="text" [(ngModel)]="changedUser.username"></td>
+
+              <td *ngIf="!editUser||user.id != changedId">{{user.email}}</td>
+              <td *ngIf="editUser&&user.id == changedId"><input type="text" [(ngModel)]="changedUser.email"></td>
+
+              <td *ngIf="!editUser||user.id != changedId">********</td>
+              <td *ngIf="editUser&&user.id == changedId"><input type="text" [(ngModel)]="newpassword"></td>
+
+              <td class="text-center" (click)="goInsurance(user.id)"><a >Check Insurance</a></td>
+              <td class="text-center"><a (click)="goHistory(user.id)">Check History</a></td>
+              <td class="text-center"><a (click)="goClaim(user.id)">Check Claim</a></td>
+
+
+              <td class="td-actions text-center">
+                <button type="button" rel="tooltip" class="btn btn-info btn-round btn-just-icon btn-sm" data-original-title="" title=""
+                        (click)="goProfile(user.id)" *ngIf="!editUser||user.id != changedId">
+                  <i class="material-icons">person</i>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-success btn-round btn-just-icon btn-sm" data-original-title="" title=""
+                        (click)="initUpdateUser(user.id)" *ngIf="!editUser||user.id != changedId">
+                  <i class="material-icons">edit</i>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-success btn-round btn-just-icon btn-sm" data-original-title="" title=""
+                        (click)="updateUser(user.id)" *ngIf="editUser&&user.id == changedId">
+                  <i class="material-icons">save</i>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-danger btn-round btn-just-icon btn-sm" data-original-title="" title=""
+                        (click)="editUser = false;changedId=null" *ngIf="editUser&&user.id == changedId">
+                  <i class="material-icons">face</i>
+                </button>
+                <button type="button" rel="tooltip" class="btn btn-danger btn-round btn-just-icon btn-sm" data-original-title="" title=""
+                        (click)="deleteUser(user.id)" *ngIf="!editUser||user.id != changedId">
+                  <i class="material-icons">close</i>
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</mat-card>

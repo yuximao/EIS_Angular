@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<mat-card class="mat-card">
+  <span class="col-md-4 display">
+    <h1>Payment</h1>
+    <span style="font-size: large">Your price</span>&nbsp;
+    <span style="font-size: large">$ <span style="color: crimson;font-style: inherit;">{{-(this.insurance.price)}}</span></span>
+  </span>
+  <div class="card-body p-5">
+
+    <ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link" ngClass.gt-xs="" data-toggle="pill" (click)="pay1()">
+          <i class="fa fa-credit-card"></i> Credit Card</a></li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" (click)="pay2()">
+          <i class="fab fa-paypal"></i> Paypal</a></li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" (click)="pay3()">
+          <i class="fa fa-university"></i> Bank Transfer</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div *ngIf="PaySwitch1" id="nav-tab-card">
+        <p class="alert alert-success">Your Payment here</p>
+        <form role="form">
+          <div class="form-group">
+            <label>Full name (on the card)</label>
+            <input type="text" class="form-control" name="username" placeholder="" required="">
+          </div> <!-- form-group.// -->
+
+          <div class="form-group">
+            <label>Card number</label>
+            <div class="input-group">
+              <input type="text" class="form-control" name="cardNumber" placeholder="">
+              <div class="input-group-append">
+				<span class="input-group-text text-muted">
+					<i class="fab fa-cc-visa"></i>   <i class="fab fa-cc-amex"></i>  
+					<i class="fab fa-cc-mastercard"></i>
+				</span>
+              </div>
+            </div>
+          </div> <!-- form-group.// -->
+
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="form-group">
+                <label><span class="hidden-xs">Expiration</span> </label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="MM" name="">
+                  <input type="number" class="form-control" placeholder="YY" name="">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV
+                  <i class="fa fa-question-circle"></i></label>
+                <input type="number" class="form-control" required="">
+              </div> <!-- form-group.// -->
+            </div>
+          </div> <!-- row.// -->
+          <!--                  <button class="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>-->
+        </form>
+      </div> <!-- tab-pane.// -->
+      <div *ngIf="PaySwitch2" id="nav-tab-paypal">
+        <p>Paypal is easiest way to pay online</p>
+        <p>
+          <button type="button" class="btn btn-primary"><i class="fab fa-paypal"></i> Log in my Paypal</button>
+        </p>
+        <p><strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. </p>
+      </div>
+      <div *ngIf="PaySwitch3" id="nav-tab-bank">
+        <p>Bank accaunt details</p>
+        <dl class="param">
+          <dt>BANK:</dt>
+          <input type="text" class="form-control" name="bankName" placeholder="">
+        </dl>
+        <dl class="param">
+          <dt>Accaunt number:</dt>
+          <input type="text" class="form-control" name="bankNumber" placeholder="">
+        </dl>
+        <dl class="param">
+          <dt>IBAN:</dt>
+          <input type="text" class="form-control" name="IBAN" placeholder="">
+        </dl>
+        <p><strong style="color: #f44336">Note:</strong> Please make sure that all the bank information you enter is
+          correct, wrong input may lead to serious consequences </p>
+      </div> <!-- tab-pane.// -->
+    </div> <!-- tab-content .// -->
+  </div>
+  <div>
+    <button mat-button routerLink="/home">Cancel</button>
+    <button mat-button style="color: #f44336" (click)="pay()">Confirm Payment</button>
+  </div>
+</mat-card>
+
+<div *ngIf="showalert" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Success!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Click to back</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
+    </div>
+  </mat-card>
+</div>

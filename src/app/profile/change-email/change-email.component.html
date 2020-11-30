@@ -1,0 +1,65 @@
+
+<mat-card class="matC" >
+
+  <h1 style="display: inline">Change Email</h1>
+  <mat-icon aria-hidden="false" aria-label="Example home icon" routerLink="/home"
+            style="margin-left: 80%;">home</mat-icon>
+  <form class="example-form" #f="ngForm" (ngSubmit)="Update()">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Old Password</mat-label>
+      <input matInput placeholder="Your old Password" name="oldPsw"
+                #oldPsw="ngModel" [(ngModel)]="oldPass" type="password" required>
+    </mat-form-field>
+    <div *ngIf="oldPsw.errors?.required && oldPsw.touched" class="error" style="color: crimson">
+      Password is required!
+    </div>
+    <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <textarea matInput placeholder="Ex. tom@gmail.com" name="email" #email="ngModel"
+                [(ngModel)]="newEmail" required pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$"></textarea>
+      <div *ngIf="email.errors?.required && email.touched" class="error" style="color: crimson">
+        email is required!
+      </div>
+      <div *ngIf="email.errors?.pattern && email.touched" class="error" style="color: crimson">
+        email Not correct!
+      </div>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button type="submit" [disabled]="f.invalid">Update</button> &nbsp;&nbsp;
+
+    <a routerLink="/profile">Back </a>
+
+  </form>
+</mat-card>
+
+<div *ngIf="showalert" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Email Changed Success!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3 style="color: #f44336">You will be Logout</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="showalert2" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1 style="color: #f44336">Old Password NOT Correct!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Please check and try again</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="showalert2 = false">OK</button>
+    </div>
+  </mat-card>
+</div>

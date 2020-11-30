@@ -1,0 +1,166 @@
+<mat-card class="matC" >
+
+  <section class="section">
+
+    <!--Section heading-->
+    <h2 class="section-heading h1 pt-4">Start a Claim</h2>
+    <!--Section description-->
+    <p class="section-description">Please left some basic information here, and we will connect you very soon. if its emergency, please call <span style="color: crimson;font-size: larger">816-694-8761</span></p>
+
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-7 col-xl-9">
+        <form id="contact-form" name="contact-form" (ngSubmit)="Submit(claim);" method="POST" #f = "ngForm">
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-6">
+              <div class="md-form">
+<!--                <input type="text" id="insurid" name="insurid" class="form-control" [(ngModel)]="claim.insurid">-->
+<!--                <label for="insurid" class="">Your Insurance Number</label>-->
+                <label style="color: #f44336">Insurance ID</label>
+                <mat-select name="insur_id" [(value)]="claim.insurid">
+                  <mat-option  *ngFor="let id of userInsuranceId" [value]="id">
+                    {{id}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div><br>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6">
+              <div class="md-form">
+                <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="claim.emerphone">
+                <label for="phone" class="">Your Connect Number(if different)</label>
+              </div>
+            </div>
+            <!--Grid column-->
+
+          </div>
+
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-6">
+              <div class="md-form">
+                <input type="text" id="ticket" name="ticket" class="form-control" [(ngModel)]="claim.ticket">
+                <label for="ticket" class="">Ticket Number</label>
+              </div>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6">
+              <div class="md-form">
+                <label for="date" class="">Ticket Date</label>&nbsp;&nbsp;
+
+                <mat-form-field class="example-full-width" id="date" >
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput name="ticketdate" [matDatepicker]="picker" [(ngModel)]="claim.ticketdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+
+              </div>
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+          <br>
+          <!--Grid row-->
+          <h3>Please update some of your claim photo, at most two (option)</h3>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="md-form">
+                <span>Please add one claim photo</span>&nbsp;
+                <input type="file" id = "photoupload" #files>
+                <a class="tag-a" (click)="addPhoto('eisuserphoto')">Select this photo</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="md-form">
+                <span>Please add one claim photo</span>&nbsp;
+                <input type="file" id = "photoupload2" #files2>
+                <a class="tag-a" (click)="addPhoto2('eisuserphoto')">Select this photo</a>
+              </div>
+            </div>
+          </div>
+            <br>
+          <!--Grid row-->
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-12">
+
+              <div class="md-form">
+                <textarea type="text" id="detail" name="detail" rows="2" class="form-control md-textarea" [(ngModel)]="claim.detail"></textarea>
+                <label for="detail">Please tell more about the detail</label>
+              </div>
+
+            </div>
+          </div>
+          <!--Grid row-->
+
+          <div class="center-on-small-only">
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+        </form>
+
+        <div class="status"></div>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-5 col-xl-3">
+        <ul class="contact-icons">
+          <li><i class="fa fa-map-marker fa-2x"></i>
+            <p>Edit the phone number ONLY if your emergency contact number does not match the reservation</p>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+    </div>
+
+  </section>
+
+</mat-card>
+<div *ngIf="showalert" style="position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Success to save your Claim!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Thank you! You will back to home</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="showalert2" style="position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Success to save your image!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>Thank you for your update</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="showalert2 = false">OK</button>
+    </div>
+  </mat-card>
+</div>

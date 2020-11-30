@@ -1,0 +1,73 @@
+  <mat-card class="matC">
+
+    <h1 style="display: inline">Register</h1>
+    <mat-icon aria-hidden="false" aria-label="Example home icon" routerLink="/home"
+              style="margin-left: 80%;">home</mat-icon>
+    <form class="example-form" #f="ngForm" (ngSubmit)="register(f);">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>UserName</mat-label>
+          <input matInput placeholder="Ex. YuxiMao" name="username" #uname="ngModel"
+                    [(ngModel)]="user.username" required minlength="3" >
+        <div *ngIf="uname.errors?.required && uname.touched" class="error" style="color: crimson">
+          Username is Required!
+        </div>
+        <div *ngIf="uname.errors?.minlength && uname.touched" class="error" style="color: crimson">
+          Username must longer than 3
+        </div>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. tom@gmail.com" name="email" #email="ngModel"
+                    [(ngModel)]="user.email" required pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$">
+        <div *ngIf="email.errors?.required && email.touched" class="error" style="color: crimson">
+          email is required!
+        </div>
+        <div *ngIf="email.errors?.pattern && email.touched" class="error" style="color: crimson">
+          email Not correct!
+        </div>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+          <input matInput name="password" [(ngModel)]="user.password" #psw="ngModel"
+                    required minlength="6" type="password" reverse="true">
+        <div *ngIf="psw.errors?.required && psw.touched" class="error" style="color: crimson">
+          Password is required!
+        </div>
+        <div *ngIf="psw.errors?.minlength && psw.touched" class="error" style="color: crimson">
+          Password must longer than 5
+        </div>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirm Password</mat-label>
+          <input matInput name="repeat" type="password" required validateEqual="password" #repeat="ngModel"
+                    reverse="false" [(ngModel)]="repass">
+        <div *ngIf="repeat.errors?.required && repeat.touched" class="error" style="color: crimson">
+          Please confirm the password
+        </div>
+        <div *ngIf="repeat.errors?.validateEqual && repeat.touched" class="error" style="color: crimson">
+          Password not match!
+        </div>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" [disabled]="f.invalid">Submit</button> &nbsp;&nbsp;
+      <a routerLink="/login">Back to Login</a>
+
+    </form>
+  </mat-card>
+
+  <div *ngIf="showalert" style="z-index: 10;position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+    <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+      <br>
+      <div style="display:flex;justify-content: center">
+        <h1>Success!</h1>
+      </div>
+      <div style="display:flex;justify-content: center">
+        <h3>Click to back</h3>
+      </div>
+      <div class="modal-footer" style=" justify-content: center">
+        <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
+      </div>
+    </mat-card>
+  </div>

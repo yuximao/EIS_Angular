@@ -1,0 +1,31 @@
+.matC{
+  min-width: 500px;
+  max-width: 800px;
+  //height: 100vh;
+  //position: relative;
+  //top: 18vh;
+
+  width: 70vw;
+  opacity: 0.95;
+}
+.mat-card {
+  background-color: rgba(255,255,255,0.85);
+}
+
+.container1{
+  padding:5%;
+  width: 90vw;
+  height: auto;
+}
+.container1 .img{
+  text-align:center;
+
+}
+.container1 .details{
+  border-left:3px solid #ded4da;
+}
+.container1 .details p{
+  font-size:15px;
+  font-weight:bold;
+}
+

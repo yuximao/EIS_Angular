@@ -1,0 +1,22 @@
+<mat-card class="mat-card">
+  <div class="outside">
+    <h1 style="top:10px">User Claim History Check</h1>
+    <h3>User ID: {{id}}</h3>
+    <button mat-button routerLink="/admin">Back</button>
+    <hr>
+    <div *ngFor="let claim of Claims">
+      <p>Claim ID: {{claim.id}}</p>
+      <p>Insurance ID: {{claim.insurid}}</p>
+      <p>Ticket ID: {{claim.ticket}}</p>
+      <p>Ticket Date: {{claim.ticketdate | date:'yyyy-MM-dd'}}</p>
+      <p>Emergency Connect Number: {{claim.emerphone}}</p>
+      <p>Details:<br> {{claim.detail}}</p>
+      <p *ngFor="let i of claim.claimImages">
+        <img style="width: 400px; height: auto" src="{{i.url}}" alt=" --  Not an image, please download and check  --"><br>
+        <a href="{{i.url}}" target="_Blank">Here To Download</a>
+      </p>
+      <hr>
+    </div>
+  </div>
+
+</mat-card>

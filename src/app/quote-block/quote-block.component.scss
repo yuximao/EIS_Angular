@@ -1,0 +1,17 @@
+.quote-block{
+  background: rgba(10,51,96,0);
+  align-items: center;
+  height: 400px;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-60%);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.quote-button{
+  background:#ff8520;
+  border-radius:100px;border:none;outline:none;height: 50px;width:200px
+}

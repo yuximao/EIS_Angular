@@ -1,0 +1,34 @@
+ <div class="social-box">
+
+    <div class="col-xs-12 text-center box-width">
+      <div class="box row">
+        <div class="col-4">
+          <img src="https://s.pngkit.com/png/small/930-9308220_free-towing-insurance-quote-in-under-24hrs-insurance.png" class="ins-image">
+        </div>
+        <div class="col-8">
+          <div class="box-title">
+            <h3>Insurance ID: {{this.ins.id}}</h3>
+          </div>
+          <div class="box-text">
+            <span>Start Date: {{this.ins.start_date | date:'yyyy-MM-dd'}}</span><br>
+            <span>End Date: {{this.ins.end_date | date:'yyyy-MM-dd'}}</span>
+          </div>
+          <div >
+            <span *ngIf="ins.price>0">
+              Status: <span style="color: #4183D7">Active</span>
+            </span>
+            <span *ngIf="ins.price<0 || ins.price == null">
+              Status: <span style="color: red">DeActive</span>
+              <button mat-button (click)="pay()">Pay Here</button>
+            </span>
+          </div>
+
+          <div class="box-btn">
+              <a style="font-size: large" (click)=goClaim()>View your Claim History</a><br>
+              <a style="font-size: large" (click)=goCar()>View/Update your Cars Information</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--</div>-->

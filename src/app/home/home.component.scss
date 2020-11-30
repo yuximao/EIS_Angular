@@ -1,0 +1,38 @@
+.background{
+  width: 100vw;
+  height: 100%;
+  background-size: cover;
+  //background-image:url("src/assets/ad.jpg");
+  position: fixed;
+  z-index: -1;
+  //background-color: dimgray;
+}
+.header-bg-video{
+  width: 100%;
+  height: auto;
+}
+.header{
+  top: 0;
+  width: 100vw;
+  position: fixed;
+  display: flex;
+}
+#phone{
+  margin-top: 12px;
+  margin-right: 20px;
+  margin-left: auto;
+  color: #ff8520;
+}
+#logo{
+  margin-top: 12px;
+  margin-left: 5px;
+  color: #ff8520;
+  font-size: larger;
+}
+#logout{
+  margin-right: 30px;
+  z-index:12;
+}
+#logoTag:hover{
+  text-decoration:none;
+}

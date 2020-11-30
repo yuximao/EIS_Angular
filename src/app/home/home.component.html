@@ -1,0 +1,31 @@
+<div class="background">
+  <video autoplay="true" loop="true" class="header-bg-video">
+    <source src="../../assets/test4-1542298376.mp4" type="video/mp4">
+  </video>
+</div>
+  <div class="header" >
+    <a routerLink="/home" id="logoTag">
+      <img src="../../assets/EISorange.png" style="width: 100px; height: 70px;">
+    <span id="logo">E - Insurance System</span>
+    </a>
+    <a href="tel:816-694-8761" id="phone">
+      <h1>816-694-8761</h1>
+    </a>
+      <button mat-button color="warn" (click)="logout()" *ngIf="auth.user" id="logout" >Logout</button>
+
+  </div>
+
+<div *ngIf="showalert" style="z-index: 10; position: fixed;display: flex;justify-content: center;top: 0vh; width: 100vw; height: 100vh; left: 0">
+  <mat-card style="width: 40vw; height: 200px; top: 30vh;">
+    <br>
+    <div style="display:flex;justify-content: center">
+      <h1>Logout Success!</h1>
+    </div>
+    <div style="display:flex;justify-content: center">
+      <h3>We will miss you:)</h3>
+    </div>
+    <div class="modal-footer" style=" justify-content: center">
+      <button type="button" class="btn btn-primary" (click)="goHome()">OK</button>
+    </div>
+  </mat-card>
+</div>

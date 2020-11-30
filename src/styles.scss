@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;width: 100% }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+app-insurance-list.ng-star-inserted {
+  width: 70% !important;
+}
+//app-login.ng-star-inserted{
+//  width: 100% !important;
+//  height: 100% !important;
+//  text-align: -webkit-center;
+//
+//}
+.click-icon:hover{
+  cursor: pointer;
+}

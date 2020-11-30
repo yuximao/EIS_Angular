@@ -1,0 +1,39 @@
+body::-webkit-scrollbar {
+  display: none;
+}
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.matC {
+  width: 75vw;
+  height: 100vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.display{
+  display: inline-block;
+  overflow: visible;
+  height: 500px;
+}
+
+.cc{
+  position: fixed;
+  top: 20%;
+}
+.nav-item:hover{
+  background-color: #0062cc;
+  cursor: pointer;
+  color: white;
+}
+.tag-a:hover{
+  background-color: #00c6ff;
+  cursor: pointer;
+  color: white;
+  font-size: large;
+}
